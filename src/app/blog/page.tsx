@@ -319,7 +319,7 @@ async function BlogListContent() {
 
       {/* Footer */}
       <footer className="border-t border-[#eae7df] px-5 py-7 text-center text-xs tracking-wide text-[#99958a] sm:px-8">
-        © {new Date().getFullYear()} Storyline. All rights reserved.
+        © 2026 Storyline. All rights reserved.
       </footer>
     </main>
   );
