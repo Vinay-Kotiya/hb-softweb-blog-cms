@@ -48,9 +48,7 @@ export default function SiteFooter() {
 
       <div className="border-t border-[#e0ded7]">
         <div className="story-container flex flex-col justify-between gap-3 py-6 text-xs text-[#85857c] sm:flex-row">
-          <span>
-            © {new Date().getFullYear()} Storyline. All rights reserved.
-          </span>
+          <span>© 2026 Storyline. All rights reserved.</span>
           <span>Designed for thoughtful reading.</span>
         </div>
       </div>
