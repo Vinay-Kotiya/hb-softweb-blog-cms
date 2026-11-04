@@ -3,7 +3,7 @@ import { getAllBlogs } from "@/services/blog.service";
 import BlogManagement from "@/components/admin/blog-management";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-
+export const instant = false;
 export default async function AdminBlogsPage() {
   // Use request-time data with Cache Components enabled.
   await connection();
