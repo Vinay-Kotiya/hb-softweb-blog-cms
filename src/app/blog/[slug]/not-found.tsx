@@ -79,8 +79,8 @@ export default function BlogNotFound() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-[#eae7df] px-5 py-7 text-center text-xs tracking-wide text-[#99958a]">
-        © {new Date().getFullYear()} Storyline. All rights reserved.
+      <footer className="border-t border-[#eae7df] px-5 py-7 text-center text-xs tracking-wide text-[#99958a] sm:px-8">
+        © 2026 Storyline. All rights reserved.
       </footer>
     </main>
   );
