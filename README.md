@@ -4,8 +4,8 @@ A full-stack Blog Content Management System built with Next.js, TypeScript, Tail
 
 ## Live Demo
 
-- **Live Website:** [Add deployed Vercel URL]
-- **GitHub Repository:** [Add repository URL]
+- **Live Website:** https://hb-softweb-blog-cms.vercel.app
+- **GitHub Repository:** https://github.com/Vinay-Kotiya/hb-softweb-blog-cms
 
 ## Features
 
@@ -51,7 +51,7 @@ A full-stack Blog Content Management System built with Next.js, TypeScript, Tail
 Clone the repository:
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/Vinay-Kotiya/hb-softweb-blog-cms.git
 cd hb-softweb-blog-cms
 ```
 
