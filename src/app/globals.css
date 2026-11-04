@@ -88,3 +88,136 @@ body {
 .tiptap:focus {
   outline: none;
 }
+
+/* =====================================
+   STORYLINE — EDITORIAL DESIGN SYSTEM
+===================================== */
+
+:root {
+  --story-paper: #f8f7f4;
+  --story-white: #ffffff;
+  --story-ink: #20231f;
+  --story-muted: #777970;
+  --story-accent: #a77b45;
+  --story-line: #e8e6df;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--story-paper);
+  color: var(--story-ink);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Editorial typography */
+
+.font-editorial {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.045em;
+}
+
+.editorial-kicker {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--story-accent);
+}
+
+/* Page layout */
+
+.story-container {
+  width: min(100% - 40px, 1280px);
+  margin-inline: auto;
+}
+
+.story-section {
+  padding-block: 88px;
+}
+
+/* Article cards */
+
+.article-card {
+  background: var(--story-white);
+  border: 1px solid var(--story-line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  border-color: #d6cbb9;
+  box-shadow: 0 18px 45px rgba(32, 35, 31, 0.07);
+}
+
+/* Decorative editorial artwork */
+
+.editorial-art {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 80% 20%, #e8d9c1 0, transparent 35%),
+    linear-gradient(135deg, #eee9df, #d8d0c1);
+}
+
+.editorial-art::before {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(80, 65, 42, 0.18);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.editorial-art::after {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border: 1px solid rgba(80, 65, 42, 0.15);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.editorial-divider {
+  height: 1px;
+  background: var(--story-line);
+}
+
+/* Motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Responsive spacing */
+
+@media (max-width: 768px) {
+  .story-section {
+    padding-block: 56px;
+  }
+
+  .story-container {
+    width: min(100% - 28px, 1280px);
+  }
+}

@@ -1,24 +1,23 @@
-import BlogForm from "@/components/admin/blog-form";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import BlogForm from "@/components/admin/blog-form";
 
 export default function NewBlogPage() {
   return (
-    <main className="mx-auto max-w-5xl space-y-6 px-5 py-10">
-      <Link
-        href="/admin/blogs"
-        className="text-sm text-blue-600 hover:underline"
-      >
-        ← Back to blogs
-      </Link>
+    <main className="min-h-screen bg-[#f8f7f4] px-4 py-8 sm:px-6 lg:px-10">
+      <div className="mx-auto max-w-7xl">
+        {/* <div className="mb-8">
+          <Link
+            href="/admin/blogs"
+            className="inline-flex items-center gap-2 text-sm text-[#777970] transition hover:text-[#a77b45]"
+          >
+            <ArrowLeft size={16} />
+            Back to content library
+          </Link>
+        </div> */}
 
-      <div>
-        <h1 className="text-3xl font-bold">Create a new blog</h1>
-        <p className="mt-2 text-slate-500">
-          Write, format and publish your blog content.
-        </p>
+        <BlogForm />
       </div>
-
-      <BlogForm />
     </main>
   );
 }
