@@ -100,7 +100,7 @@ export default function BlogForm({ blogId }: BlogFormProps) {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
-    setLastSaved(false);
+    // setLastSaved(false);
 
     if (!title.trim()) {
       setError("Please enter an article title.");
@@ -136,7 +136,7 @@ export default function BlogForm({ blogId }: BlogFormProps) {
         throw new Error(result.message || "Unable to save article");
       }
 
-      setLastSaved(true);
+      // setLastSaved(true);
 
       router.push("/admin/blogs");
       router.refresh();
@@ -227,7 +227,7 @@ export default function BlogForm({ blogId }: BlogFormProps) {
               value={title}
               onChange={(e) => {
                 setTitle(e.target.value);
-                setLastSaved(false);
+                // setLastSaved(false);
               }}
               maxLength={180}
               required
@@ -281,7 +281,7 @@ export default function BlogForm({ blogId }: BlogFormProps) {
                 initialContent={content}
                 onChange={(value) => {
                   setContent(value);
-                  setLastSaved(false);
+                  // setLastSaved(false);
                 }}
               />
             </div>
