@@ -1,34 +1,9 @@
-// import ScrollRingGallery from "@/components/ScrollRingGallery";
-// import Image from "next/image";
-
-// export default function Home() {
-//   return (
-//     <>
-//       <main className="flex min-h-screen items-center justify-center bg-slate-950">
-//         <div className="rounded-xl bg-white p-10 text-center shadow-xl">
-//           <h1 className="text-4xl font-bold text-blue-600">
-//             HB Softweb Blog CMS
-//           </h1>
-
-//           <p className="mt-4 text-gray-600">
-//             Next.js and Tailwind CSS are working!
-//           </p>
-
-//           <button className="mt-6 rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700">
-//             Test Button
-//           </button>
-//         </div>
-//       </main>
-//       <ScrollRingGallery />
-//     </>
-//   );
-// }
-
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
 
 import SiteShell from "@/components/site/site-shell";
 import { getAllBlogs } from "@/services/blog.service";
+import { Suspense } from "react";
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("en-IN", {
@@ -37,8 +12,23 @@ function formatDate(date: Date) {
     year: "numeric",
   }).format(new Date(date));
 }
+function HomePageFallback() {
+  return (
+    <main className="mx-auto max-w-7xl px-5 py-12">
+      <div className="h-10 w-64 animate-pulse rounded bg-gray-200" />
+      <div className="mt-8 grid gap-6 md:grid-cols-3">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div
+            key={index}
+            className="h-72 animate-pulse rounded-xl bg-gray-200"
+          />
+        ))}
+      </div>
+    </main>
+  );
+}
 
-export default async function HomePage() {
+async function HomePageContent() {
   const blogs = await getAllBlogs();
 
   const featured = blogs[0];
@@ -272,5 +262,12 @@ export default async function HomePage() {
         </div>
       </section>
     </SiteShell>
+  );
+}
+export default function HomePage() {
+  return (
+    <Suspense fallback={<HomePageFallback />}>
+      <HomePageContent />
+    </Suspense>
   );
 }
