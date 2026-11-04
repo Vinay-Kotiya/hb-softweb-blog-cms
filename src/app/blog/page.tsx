@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, BookOpen, CalendarDays } from "lucide-react";
 import { connection } from "next/server";
 
 import { prisma } from "@/lib/prisma";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Journal | Latest Articles & Insights",
