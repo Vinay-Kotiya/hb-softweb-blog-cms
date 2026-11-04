@@ -1,14 +1,3 @@
-// import ScrollRingGallery from "@/components/ScrollRingGallery";
-// // import { ScrollRingExperience } from "../../components/ScrollRingExperience";
-// export default function Page() {
-//   return (
-//     <>
-//       <ScrollRingGallery />
-//       {/* <ScrollRingExperience /> */}
-//     </>
-//   );
-// }
-
 import ScrollRingGallery from "@/components/ScrollRingGallery";
 import TripadaNavbar from "@/components/TripadaNavbar";
 
