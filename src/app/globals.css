@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tiptap editor content styles */
+.tiptap {
+  min-height: 320px;
+  line-height: 1.8;
+  color: #334155;
+}
+
+.tiptap p {
+  margin: 12px 0;
+}
+
+.tiptap h1 {
+  margin: 24px 0 12px;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.tiptap h2 {
+  margin: 22px 0 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.tiptap h3 {
+  margin: 18px 0 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.tiptap ul {
+  list-style: disc;
+  padding-left: 24px;
+  margin: 12px 0;
+}
+
+.tiptap ol {
+  list-style: decimal;
+  padding-left: 24px;
+  margin: 12px 0;
+}
+
+.tiptap li {
+  margin: 5px 0;
+}
+
+.tiptap a {
+  color: #2563eb;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.tiptap blockquote {
+  border-left: 4px solid #cbd5e1;
+  padding-left: 16px;
+  margin: 16px 0;
+  color: #64748b;
+}
+
+.tiptap:focus {
+  outline: none;
+}
