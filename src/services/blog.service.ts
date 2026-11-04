@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { generateUniqueSlug } from "@/lib/slug";
-import { Prisma } from "@/generated/prisma/client";
+import { Prisma } from "@prisma/client";
 
 type BlogData = {
   title: string;
