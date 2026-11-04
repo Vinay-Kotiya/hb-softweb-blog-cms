@@ -25,6 +25,23 @@ type BlogItem = {
   createdAt: Date;
 };
 
+function BlogListFallback() {
+  return (
+    <main className="mx-auto max-w-7xl px-5 py-12">
+      <div className="h-10 w-56 animate-pulse rounded bg-gray-200" />
+
+      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div
+            key={index}
+            className="h-72 animate-pulse rounded-xl bg-gray-200"
+          />
+        ))}
+      </div>
+    </main>
+  );
+}
+
 /**
  * Extract readable text from Tiptap JSON.
  * Formatting nodes are traversed recursively.
@@ -91,7 +108,7 @@ async function getBlogs(): Promise<BlogItem[]> {
   });
 }
 
-export default async function BlogListingPage() {
+async function BlogListContent() {
   // Ensures this page reads the latest database content per request.
   await connection();
 
@@ -304,5 +321,13 @@ export default async function BlogListingPage() {
         © {new Date().getFullYear()} Storyline. All rights reserved.
       </footer>
     </main>
+  );
+}
+
+export default function BlogPage() {
+  return (
+    <Suspense fallback={<BlogListFallback />}>
+      <BlogListContent />
+    </Suspense>
   );
 }
