@@ -48,7 +48,8 @@ export default function BlogForm({ blogId }: BlogFormProps) {
   const [loading, setLoading] = useState(isEditing);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  // const [lastSaved, setLastSaved] = useState(false);
+  const [lastSaved, setLastSaved] = useState(false);
+  const [editorKey, setEditorKey] = useState(0);
 
   const wordCount = getTextFromContent(content)
     .trim()
@@ -99,8 +100,9 @@ export default function BlogForm({ blogId }: BlogFormProps) {
   // Create or update blog
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     setError("");
-    // setLastSaved(false);
+    setLastSaved(false);
 
     if (!title.trim()) {
       setError("Please enter an article title.");
@@ -136,10 +138,24 @@ export default function BlogForm({ blogId }: BlogFormProps) {
         throw new Error(result.message || "Unable to save article");
       }
 
-      // setLastSaved(true);
+      if (isEditing) {
+        // Updating an existing article
+        router.push("/admin/blogs");
+        router.refresh();
+        return;
+      }
 
-      router.push("/admin/blogs");
-      router.refresh();
+      // Successfully created a new article
+      setTitle("");
+      setContent({
+        type: "doc",
+        content: [{ type: "paragraph" }],
+      });
+
+      // Force Tiptap editor to initialize with empty content
+      setEditorKey((previous) => previous + 1);
+
+      setLastSaved(true);
     } catch (err) {
       setError(
         err instanceof Error
@@ -150,6 +166,59 @@ export default function BlogForm({ blogId }: BlogFormProps) {
       setSaving(false);
     }
   }
+  // async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   setError("");
+  //   setLastSaved(false);
+
+  //   if (!title.trim()) {
+  //     setError("Please enter an article title.");
+  //     return;
+  //   }
+
+  //   if (!getTextFromContent(content).trim()) {
+  //     setError("Please write some article content before publishing.");
+  //     return;
+  //   }
+
+  //   setSaving(true);
+
+  //   try {
+  //     const endpoint = isEditing
+  //       ? `/api/admin/blogs/${blogId}`
+  //       : "/api/admin/blogs";
+
+  //     const response = await fetch(endpoint, {
+  //       method: isEditing ? "PATCH" : "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         title: title.trim(),
+  //         content,
+  //       }),
+  //     });
+
+  //     const result = await response.json();
+
+  //     if (!response.ok) {
+  //       throw new Error(result.message || "Unable to save article");
+  //     }
+
+  //     setLastSaved(true);
+
+  //     router.push("/admin/blogs");
+  //     router.refresh();
+  //   } catch (err) {
+  //     setError(
+  //       err instanceof Error
+  //         ? err.message
+  //         : "Something went wrong while saving the article.",
+  //     );
+  //   } finally {
+  //     setSaving(false);
+  //   }
+  // }
 
   if (loading) {
     return (
@@ -227,7 +296,8 @@ export default function BlogForm({ blogId }: BlogFormProps) {
               value={title}
               onChange={(e) => {
                 setTitle(e.target.value);
-                // setLastSaved(false);
+                setLastSaved(false);
+                setError("");
               }}
               maxLength={180}
               required
@@ -276,12 +346,21 @@ export default function BlogForm({ blogId }: BlogFormProps) {
             </div>
 
             <div className="min-h-[480px] p-4 sm:p-7">
-              <RichTextEditor
+              {/* <RichTextEditor
                 key={blogId || "new-blog"}
                 initialContent={content}
                 onChange={(value) => {
                   setContent(value);
-                  // setLastSaved(false);
+                  setLastSaved(false);
+                }}
+              /> */}
+              <RichTextEditor
+                key={`${blogId || "new-blog"}-${editorKey}`}
+                initialContent={content}
+                onChange={(value) => {
+                  setContent(value);
+                  setLastSaved(false);
+                  setError("");
                 }}
               />
             </div>
@@ -435,6 +514,28 @@ export default function BlogForm({ blogId }: BlogFormProps) {
           </section>
         </aside>
       </div>
+
+      {lastSaved && (
+        <div
+          role="status"
+          className="flex items-center justify-between gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800"
+        >
+          <div className="flex items-center gap-2">
+            <span className="font-semibold">✓</span>
+            <p>
+              Article published successfully! Your editor is ready for another
+              article.
+            </p>
+          </div>
+
+          <Link
+            href="/admin/blogs"
+            className="shrink-0 font-semibold underline underline-offset-4"
+          >
+            View articles
+          </Link>
+        </div>
+      )}
 
       {/* Error feedback */}
 

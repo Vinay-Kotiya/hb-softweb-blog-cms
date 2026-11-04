@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   },
   description:
     "Discover thoughtful perspectives, practical knowledge and meaningful stories.",
+
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
