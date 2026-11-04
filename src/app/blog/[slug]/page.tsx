@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { connection } from "next/server";
 import type { ReactNode } from "react";
 import {
   ArrowLeft,
@@ -10,10 +9,9 @@ import {
   CalendarDays,
   Clock3,
 } from "lucide-react";
+import { Suspense } from "react";
 
 import { prisma } from "@/lib/prisma";
-
-export const instant = false;
 
 type TiptapMark = {
   type?: string;
@@ -373,8 +371,6 @@ function renderNode(node: TiptapNode, index: number): ReactNode {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  await connection();
-
   const { slug } = await params;
   const blog = await getBlog(slug);
 
@@ -398,17 +394,47 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogDetailPage({ params }: PageProps) {
-  await connection();
+function BlogDetailFallback() {
+  return (
+    <main className="min-h-screen bg-[#f8f7f4]">
+      <header className="border-b border-[#eae7df] px-5 py-6">
+        <div className="mx-auto max-w-7xl">
+          <div className="h-5 w-32 animate-pulse rounded bg-gray-200" />
+        </div>
+      </header>
 
+      <section className="mx-auto max-w-4xl px-5 pb-12 pt-16">
+        <div className="h-4 w-36 animate-pulse rounded bg-gray-200" />
+        <div className="mt-8 h-12 w-full animate-pulse rounded bg-gray-200" />
+        <div className="mt-4 h-12 w-3/4 animate-pulse rounded bg-gray-200" />
+        <div className="mt-10 h-5 w-48 animate-pulse rounded bg-gray-200" />
+      </section>
+
+      <section className="mx-auto max-w-4xl px-5 pb-24">
+        <div className="space-y-4 rounded-2xl border border-[#ebe7df] bg-white p-8 sm:p-12">
+          <div className="h-4 w-full animate-pulse rounded bg-gray-200" />
+          <div className="h-4 w-full animate-pulse rounded bg-gray-200" />
+          <div className="h-4 w-5/6 animate-pulse rounded bg-gray-200" />
+          <div className="h-4 w-full animate-pulse rounded bg-gray-200" />
+          <div className="h-4 w-2/3 animate-pulse rounded bg-gray-200" />
+        </div>
+      </section>
+    </main>
+  );
+}
+
+async function BlogDetailContent({ params }: PageProps) {
   const { slug } = await params;
   const blog = await getBlog(slug);
 
-  if (!blog) notFound();
+  if (!blog) {
+    notFound();
+  }
 
   const content = blog.content as TiptapNode;
   const readingTime = getReadingTime(content);
   const publishedDate = formatDate(blog.createdAt);
+
   const wasUpdated =
     blog.updatedAt.getTime() - blog.createdAt.getTime() > 60_000;
 
@@ -481,6 +507,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
               <p className="font-serif text-xl italic text-[#777970]">
                 Thank you for reading.
               </p>
+
               <p className="mt-2 text-sm text-[#99958a]">
                 Explore more ideas and stories from our journal.
               </p>
@@ -508,5 +535,13 @@ export default async function BlogDetailPage({ params }: PageProps) {
         © 2026 Storyline. All rights reserved.
       </footer>
     </main>
+  );
+}
+
+export default function BlogDetailPage({ params }: PageProps) {
+  return (
+    <Suspense fallback={<BlogDetailFallback />}>
+      <BlogDetailContent params={params} />
+    </Suspense>
   );
 }
