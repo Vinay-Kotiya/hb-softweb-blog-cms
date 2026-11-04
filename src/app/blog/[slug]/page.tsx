@@ -13,6 +13,8 @@ import {
 
 import { prisma } from "@/lib/prisma";
 
+export const instant = false;
+
 type TiptapMark = {
   type?: string;
   attrs?: Record<string, unknown>;
