@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import type { ReactNode } from "react";
+
+type RootLayoutProps = {
+  children: ReactNode;
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +25,7 @@ export const metadata: Metadata = {
   description:
     "Discover thoughtful perspectives, practical knowledge and meaningful stories.",
 };
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
