@@ -1,10 +1,26 @@
 import BlogForm from "@/components/admin/blog-form";
+import { Suspense } from "react";
 
 type PageProps = {
   params: Promise<{ id: string }>;
 };
+type EditBlogPageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
 
-export default async function EditBlogPage({ params }: PageProps) {
+function EditBlogFallback() {
+  return (
+    <div className="mx-auto w-full max-w-5xl space-y-6">
+      <div className="h-8 w-48 animate-pulse rounded bg-gray-200" />
+      <div className="h-12 animate-pulse rounded bg-gray-200" />
+      <div className="h-80 animate-pulse rounded bg-gray-200" />
+    </div>
+  );
+}
+
+async function EditBlogContent({ params }: PageProps) {
   const { id } = await params;
 
   return (
@@ -18,5 +34,13 @@ export default async function EditBlogPage({ params }: PageProps) {
 
       <BlogForm blogId={id} />
     </main>
+  );
+}
+
+export default function EditBlogPage({ params }: EditBlogPageProps) {
+  return (
+    <Suspense fallback={<EditBlogFallback />}>
+      <EditBlogContent params={params} />
+    </Suspense>
   );
 }
