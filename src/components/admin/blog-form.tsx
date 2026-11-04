@@ -8,7 +8,6 @@ import {
   ArrowLeft,
   ArrowUpRight,
   BookOpen,
-  Check,
   Clock3,
   FileText,
   Loader2,
@@ -49,7 +48,7 @@ export default function BlogForm({ blogId }: BlogFormProps) {
   const [loading, setLoading] = useState(isEditing);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [lastSaved, setLastSaved] = useState(false);
+  // const [lastSaved, setLastSaved] = useState(false);
 
   const wordCount = getTextFromContent(content)
     .trim()

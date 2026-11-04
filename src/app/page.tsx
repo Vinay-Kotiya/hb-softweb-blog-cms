@@ -95,7 +95,7 @@ export default async function HomePage() {
       <section className="story-container pb-20">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <p className="editorial-kicker mb-2">THE EDITOR'S PICK</p>
+            <p className="editorial-kicker mb-2">THE EDITOR&apos;S PICK</p>
             <h2 className="font-editorial text-3xl md:text-4xl">
               Featured story
             </h2>
@@ -159,8 +159,8 @@ export default async function HomePage() {
             </h3>
 
             <p className="mx-auto mt-3 max-w-md text-sm leading-7 text-[#777970]">
-              Publish your first article from the Writer's Studio and it will
-              appear here automatically.
+              Publish your first article from the Writer&apos;s Studio and it
+              will appear here automatically.
             </p>
 
             <Link

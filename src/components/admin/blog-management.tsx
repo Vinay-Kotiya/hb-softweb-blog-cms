@@ -203,8 +203,8 @@ export default function BlogManagement({ blogs }: BlogManagementProps) {
             </h3>
 
             <p className="mx-auto mt-3 max-w-sm text-sm leading-7 text-[#777970]">
-              You haven't created any articles yet. Start writing your first
-              story.
+              You haven&apos;t created any articles yet. Start writing your
+              first story.
             </p>
 
             <Link

@@ -32,7 +32,7 @@ export default function SiteFooter() {
               Journal
             </Link>
             <Link href="/admin/blogs" className="hover:text-[#a77b45]">
-              Writer's Studio
+              Writer&apos;s Studio
             </Link>
           </div>
 

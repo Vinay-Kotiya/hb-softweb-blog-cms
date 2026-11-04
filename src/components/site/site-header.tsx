@@ -53,7 +53,7 @@ export default function SiteHeader() {
           href="/admin/blogs"
           className="flex items-center gap-2 rounded-full bg-[#20231f] px-5 py-3 text-xs font-semibold text-white transition hover:bg-[#a77b45]"
         >
-          <span>Writer's Studio</span>
+          <span>Writer&apos;s Studio</span>
           <ArrowUpRight size={15} />
         </Link>
       </div>
